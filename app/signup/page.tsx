@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 export default function SignupPage() {
   const [email, setEmail] = useState('')
@@ -32,7 +33,7 @@ export default function SignupPage() {
     }
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -42,10 +43,29 @@ export default function SignupPage() {
 
       if (error) throw error
 
-      router.push('/')
-      router.refresh()
+      // Check if email confirmation is required
+      if (data.user && !data.session) {
+        toast.success(
+          'Confirmation email sent! Please check your inbox and click the confirmation link.',
+          {
+            duration: 6000,
+          }
+        )
+        // Don't redirect immediately if email confirmation is required
+        // User should check their email first
+        setTimeout(() => {
+          router.push('/login')
+        }, 2000)
+      } else {
+        // User is automatically signed in (email confirmation disabled)
+        toast.success('Account created successfully!')
+        router.push('/')
+        router.refresh()
+      }
     } catch (error: any) {
-      setError(error.message || 'An error occurred')
+      const errorMessage = error.message || 'An error occurred'
+      setError(errorMessage)
+      toast.error(errorMessage)
     } finally {
       setLoading(false)
     }

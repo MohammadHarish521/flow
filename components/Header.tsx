@@ -2,6 +2,8 @@
 
 import { useAuth } from '@/lib/auth-context';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 export default function Header() {
   const { user, signOut } = useAuth();
@@ -9,7 +11,7 @@ export default function Header() {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push('/login');
+    toast.success('Signed out successfully');
     router.refresh();
   };
 
@@ -46,7 +48,7 @@ export default function Header() {
         {/* Right: Actions */}
         <div className="flex items-center gap-4">
           <span className="text-sm text-(--color-text-tertiary)">/ to Focus</span>
-          {user && (
+          {user ? (
             <div className="flex items-center gap-2">
               <span className="text-sm text-(--color-text-secondary)">{user.email}</span>
               <button
@@ -55,6 +57,21 @@ export default function Header() {
               >
                 Sign Out
               </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                href="/login"
+                className="px-3 py-1.5 text-sm text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                Login
+              </Link>
+              <Link
+                href="/signup"
+                className="px-3 py-1.5 text-sm text-white bg-purple-600 hover:bg-purple-700 rounded-md transition-colors"
+              >
+                Sign Up
+              </Link>
             </div>
           )}
           <button className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors">
