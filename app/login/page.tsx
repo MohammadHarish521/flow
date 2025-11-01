@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -26,10 +27,13 @@ export default function LoginPage() {
 
       if (error) throw error
 
+      toast.success('Welcome back!')
       router.push('/')
       router.refresh()
     } catch (error: any) {
-      setError(error.message || 'An error occurred')
+      const errorMessage = error.message || 'An error occurred'
+      setError(errorMessage)
+      toast.error(errorMessage)
     } finally {
       setLoading(false)
     }

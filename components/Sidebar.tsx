@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/auth-context';
+import toast from 'react-hot-toast';
 import type { Category } from '@/lib/mockData';
 
 interface SidebarProps {
@@ -9,6 +11,19 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ selectedCategory, onCategoryChange }: SidebarProps) {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  const handleNewNote = () => {
+    if (!user) {
+      toast.error('Please sign in to create a new note');
+      router.push('/login');
+      return;
+    }
+    // TODO: Implement new note creation
+    toast.success('New note feature coming soon!');
+  };
+
   const categories: Array<{ name: string; color: string }> = [
     { name: 'All', color: '' },
     { name: 'Starred', color: '' },
@@ -35,7 +50,10 @@ export default function Sidebar({ selectedCategory, onCategoryChange }: SidebarP
 
       {/* New Note Button */}
       <div className="p-4">
-        <button className="w-full bg-(--color-text-primary) text-white rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors">
+        <button 
+          onClick={handleNewNote}
+          className="w-full bg-(--color-text-primary) text-white rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
+        >
           <span className="text-lg">+</span>
           <span className="font-medium">New Note</span>
         </button>
