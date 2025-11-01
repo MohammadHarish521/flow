@@ -37,7 +37,7 @@ export async function updateSession(request: NextRequest) {
 
   // Protected routes - only protect specific routes that require auth
   // Homepage and public routes are accessible without authentication
-  const protectedRoutes = [
+  const protectedRoutes: string[] = [
     // Add protected routes here if needed in the future
     // '/dashboard',
     // '/settings',
