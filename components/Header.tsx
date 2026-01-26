@@ -1,8 +1,8 @@
 'use client';
 
 import { useAuth } from '@/lib/auth-context';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 export default function Header() {
@@ -16,76 +16,84 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4">
-      <div className="flex items-center justify-between">
-        {/* Left: All dropdown */}
-        <div className="flex items-center gap-2">
-          <svg className="w-5 h-5 text-(--color-text-secondary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+    <header className="bg-white px-8 pt-8 pb-6">
+      {/* Top Row: Title & Auth */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <svg className="w-8 h-8 text-(--color-text-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
-          <span className="font-medium text-(--color-text-primary)">All</span>
-          <svg className="w-4 h-4 text-(--color-text-tertiary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+          <h1 className="heading-serif text-4xl text-(--color-text-primary)">All</h1>
         </div>
 
-        {/* Center: Search */}
-        <div className="flex-1 max-w-2xl mx-8">
-          <div className="relative">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-(--color-text-tertiary)">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input
-              type="text"
-              placeholder="Search notes..."
-              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-        </div>
-
-        {/* Right: Actions */}
         <div className="flex items-center gap-4">
-          <span className="text-sm text-(--color-text-tertiary)">/ to Focus</span>
           {user ? (
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-(--color-text-secondary)">{user.email}</span>
-              <button
-                onClick={handleSignOut}
-                className="px-3 py-1.5 text-sm text-white bg-purple-600 hover:bg-purple-700 rounded-md transition-colors"
+            <button
+              onClick={handleSignOut}
+              className="group flex items-center justify-center w-10 h-10 rounded-full bg-black text-white hover:w-24 hover:bg-red-500 transition-all duration-300 ease-in-out relative overflow-hidden shadow-sm"
+              title="Sign Out"
+            >
+              <svg 
+                className="w-5 h-5 absolute transition-all duration-300 group-hover:opacity-0 group-hover:scale-50" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
               >
-                Sign Out
-              </button>
-            </div>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span className="text-sm font-medium opacity-0 group-hover:opacity-100 absolute transition-all duration-300 scale-50 group-hover:scale-100 whitespace-nowrap">
+                Logout
+              </span>
+            </button>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="px-3 py-1.5 text-sm text-gray-700 hover:text-gray-900 transition-colors"
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Login
               </Link>
               <Link
                 href="/signup"
-                className="px-3 py-1.5 text-sm text-white bg-purple-600 hover:bg-purple-700 rounded-md transition-colors"
+                className="px-4 py-2 text-sm text-white bg-black hover:bg-gray-800 rounded-lg transition-colors"
               >
                 Sign Up
               </Link>
             </div>
           )}
-          <button className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors">
-            <svg className="w-5 h-5 text-(--color-text-secondary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-          </button>
-          <button className="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center hover:bg-gray-800 transition-colors">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </button>
         </div>
+      </div>
+
+      {/* Bottom Row: Search & Actions */}
+      <div className="flex items-center gap-4">
+        {/* Search Bar */}
+        <div className="relative flex-1">
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            type="text"
+            placeholder="Search notes..."
+            className="w-full pl-12 pr-24 py-3 bg-gray-50 border border-gray-100 rounded-full text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:bg-white transition-all shadow-sm"
+          />
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400 font-medium px-2 py-1 bg-white rounded border border-gray-200 shadow-sm">
+            / to Focus
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <button className="w-11 h-11 rounded-full bg-black hover:bg-gray-800 flex items-center justify-center transition-colors shadow-sm group">
+          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+        </button>
+        <button className="w-11 h-11 rounded-full bg-black hover:bg-gray-800 flex items-center justify-center transition-colors shadow-sm">
+          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+          </svg>
+        </button>
       </div>
     </header>
   );

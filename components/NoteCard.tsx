@@ -1,14 +1,15 @@
 'use client';
 
+import type { Note } from '@/lib/notes';
+import { categoryColors } from '@/lib/notes';
 import { useState } from 'react';
-import type { Note } from '@/lib/mockData';
-import { categoryColors } from '@/lib/mockData';
 
 interface NoteCardProps {
   note: Note;
+  onClick?: () => void;
 }
 
-export default function NoteCard({ note }: NoteCardProps) {
+export default function NoteCard({ note, onClick }: NoteCardProps) {
   const [isFavorite, setIsFavorite] = useState(note.isFavorite);
   const colors = categoryColors[note.category];
 
@@ -51,7 +52,10 @@ export default function NoteCard({ note }: NoteCardProps) {
   };
 
   return (
-    <div className={`${colors.light} rounded-2xl p-6 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer`}>
+    <div 
+      onClick={onClick}
+      className={`${colors.light} rounded-2xl p-6 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer`}
+    >
       {/* Category Tag */}
       <div className="flex items-center gap-2 mb-3">
         <span className={colors.accent}>{categoryIcons[note.category]}</span>
