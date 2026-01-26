@@ -1,8 +1,8 @@
+import { AuthProvider } from "@/lib/auth-context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { AuthProvider } from "@/lib/auth-context";
 import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Slate - Where colorful ideas find their home",
+  title: "Sirius - Where colorful ideas find their home",
   description: "A beautiful note-taking app for organizing your thoughts",
 };
 
