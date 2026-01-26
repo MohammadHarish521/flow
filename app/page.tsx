@@ -17,6 +17,7 @@ export default function Home() {
   const [notesError, setNotesError] = useState<string | null>(null);
   const [isNewNoteModalOpen, setIsNewNoteModalOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState<Note | undefined>(undefined);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user, loading: authLoading } = useAuth();
 
   const filteredNotes = useMemo(() => {
@@ -79,9 +80,11 @@ export default function Home() {
           setSelectedNote(undefined);
           setIsNewNoteModalOpen(true);
         }}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Header />
+        <Header onOpenSidebar={() => setIsSidebarOpen(true)} />
         <main className="flex-1 overflow-y-auto">
           {notesError && (
             <div className="p-6 text-red-600">

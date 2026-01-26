@@ -5,7 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-export default function Header() {
+interface HeaderProps {
+  onOpenSidebar?: () => void;
+}
+
+export default function Header({ onOpenSidebar }: HeaderProps) {
   const { user, signOut } = useAuth();
   const router = useRouter();
 
@@ -20,6 +24,16 @@ export default function Header() {
       {/* Top Row: Title & Auth */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={onOpenSidebar}
+            className="md:hidden p-2 -ml-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
           <svg className="w-8 h-8 text-(--color-text-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
