@@ -10,14 +10,22 @@ interface NotesGridProps {
 
 export default function NotesGrid({ notes, onNoteClick }: NotesGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-6">
-      {notes.map((note) => (
-        <NoteCard 
-          key={note.id} 
-          note={note} 
-          onClick={() => onNoteClick?.(note)}
-        />
-      ))}
+    <div className="max-w-5xl mx-auto px-8 py-6">
+      <div className="bg-white dark:bg-(--sidebar-bg) rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
+        {notes.length === 0 ? (
+          <div className="px-4 py-12 text-center text-gray-500 dark:text-gray-400">
+            <p>No notes yet. Create your first note to get started.</p>
+          </div>
+        ) : (
+          notes.map((note) => (
+            <NoteCard 
+              key={note.id} 
+              note={note} 
+              onClick={() => onNoteClick?.(note)}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 }

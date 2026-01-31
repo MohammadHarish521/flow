@@ -2,6 +2,7 @@
 
 import type { Note } from '@/lib/notes';
 import { categoryColors } from '@/lib/notes';
+import { FileText, Star } from 'lucide-react';
 import { useState } from 'react';
 
 interface NoteCardProps {
@@ -46,55 +47,64 @@ export default function NoteCard({ note, onClick }: NoteCardProps) {
     ),
     Ideas: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
       </svg>
     )
   };
 
+  // Strip HTML tags for preview
+  const plainTextDescription = note.description.replace(/<[^>]+>/g, '').trim();
+
   return (
     <div 
       onClick={onClick}
-      className={`${colors.light} rounded-2xl p-6 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer`}
+      className="group flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors border-b border-gray-100 dark:border-gray-800 last:border-b-0"
     >
-      {/* Category Tag */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className={colors.accent}>{categoryIcons[note.category]}</span>
-        <span className={`text-xs font-medium ${colors.accent}`}>{note.category}</span>
+      {/* Icon */}
+      <div className="flex-shrink-0">
+        <div className="w-6 h-6 flex items-center justify-center text-gray-400 dark:text-gray-500">
+          <FileText className="w-5 h-5" />
+        </div>
       </div>
 
-      {/* Title */}
-      <h3 className="heading-serif text-xl mb-3 text-(--color-text-primary)">
-        {note.title}
-      </h3>
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-0.5">
+          <h3 className="font-medium text-[15px] text-gray-900 dark:text-gray-100 truncate">
+            {note.title || 'Untitled'}
+          </h3>
+        </div>
+        {plainTextDescription && (
+          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+            {plainTextDescription}
+          </p>
+        )}
+      </div>
 
-      {/* Description */}
-      <p className="text-body mb-4 line-clamp-4">
-        {note.description}
-      </p>
+      {/* Metadata */}
+      <div className="flex items-center gap-3 flex-shrink-0">
+        {/* Category Badge */}
+        <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-800">
+          <span className={colors.accent}>{categoryIcons[note.category]}</span>
+          <span className={`text-xs font-medium ${colors.accent}`}>{note.category}</span>
+        </div>
 
-      {/* Footer */}
-      <div className="flex items-center justify-between">
-        <span className="text-small">{note.timestamp}</span>
+        {/* Timestamp */}
+        <span className="text-xs text-gray-400 dark:text-gray-500 min-w-[80px] text-right">
+          {note.timestamp}
+        </span>
+
+        {/* Favorite */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             setIsFavorite(!isFavorite);
           }}
-          className="text-(--color-text-tertiary) hover:text-yellow-500 transition-colors"
+          className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-yellow-500 dark:text-gray-500 dark:hover:text-yellow-400"
         >
-          <svg
-            className="w-5 h-5"
-            fill={isFavorite ? 'currentColor' : 'none'}
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-            />
-          </svg>
+          <Star 
+            className={`w-4 h-4 ${isFavorite ? 'fill-yellow-500 text-yellow-500' : ''}`}
+          />
         </button>
       </div>
     </div>

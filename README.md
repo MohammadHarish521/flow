@@ -1,10 +1,10 @@
-# Sirius
+# Flow
 
-**irk where colorful ideas find their home.**
+**Where colorful ideas find their home.**
 
-Sirius is a beautiful, modern note-taking application designed to help you organize your thoughts, ideas, and tasks with style. Built with performance and user experience in mind, it features a clean, two-row header layout, vibrant category-based color coding, and seamless authentication.
+Flow is a beautiful, modern note-taking application designed to help you organize your thoughts, ideas, and tasks with style. Built with performance and user experience in mind, it features a clean, two-row header layout, vibrant category-based color coding, and seamless authentication.
 
-![Sirius Banner](/public/banner-placeholder.png) 
+![Flow Banner](/public/banner-placeholder.png) 
 *(Add a screenshot of your dashboard here)*
 
 ## ✨ Features
@@ -17,15 +17,19 @@ Sirius is a beautiful, modern note-taking application designed to help you organ
 - **⭐ Favorites**: Quickly access your most important notes by starring them.
 - **📱 Fully Responsive**: Works perfectly on desktop, tablet, and mobile devices.
 - **🔍 Search & Filter**: Easily find what you're looking for (UI implementations).
+- **🌙 Dark Mode**: Full dark mode support with softer, eye-friendly colors.
+- **✍️ Rich Text Editor**: Notion-like editing experience with formatting, headings, lists, and more.
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
 - **Backend & Auth**: [Supabase](https://supabase.com/)
-- **Icons**: Custom SVGs & Heroicons
+- **Rich Text**: [TipTap](https://tiptap.dev/)
+- **Icons**: Lucide React & Custom SVGs
 - **Notifications**: React Hot Toast
+- **Theme**: next-themes
 
 ## 🚀 Getting Started
 
@@ -71,7 +75,7 @@ Follow these steps to set up the project locally on your machine.
 ## 🗂️ Project Structure
 
 ```bash
-sirius/
+flow/
 ├── app/                # Next.js App Router pages
 │   ├── globals.css     # Global styles & Tailwind config
 │   ├── layout.tsx      # Root layout
@@ -81,6 +85,7 @@ sirius/
 │   ├── Sidebar.tsx     # Navigation & Categories
 │   ├── NoteModal.tsx   # Create/Edit Note Modal
 │   ├── NoteCard.tsx    # Individual note display
+│   ├── TipTapEditor.tsx # Rich text editor
 │   └── ...
 ├── lib/                # Utilities & Configuration
 │   ├── supabase/       # Supabase client config

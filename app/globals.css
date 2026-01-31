@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #F9FAFB;
@@ -9,22 +11,50 @@
   --text-secondary: #6B7280;
   --text-tertiary: #9CA3AF;
   
-  /* Category colors */
-  --purple-light: #E9D5FF;
-  --peach-light: #FED7AA;
-  --cyan-light: #A5F3FC;
-  --blue-light: #BFDBFE;
-  --pink-light: #FBCFE8;
-  --green-light: #D1FAE5;
+  /* Category colors - Light Mode */
+  --purple-light: #F3E8FF; /* lighter than original for better contrast */
+  --peach-light: #FFEDD5;
+  --cyan-light: #CFFAFE;
+  --blue-light: #DBEAFE;
+  --pink-light: #FCE7F3;
+  --green-light: #ECFDF5;
 
-  /* Accent colors */
+  /* Accent colors - Light Mode */
   --work-accent: #8B5CF6;
   --travel-accent: #F97316;
   --projects-accent: #10B981;
   --personal-accent: #3B82F6;
   --education-accent: #6366F1;
   --finance-accent: #EF4444;
-  --ideas-accent: #FBBF24;
+  --ideas-accent: #F59E0B; /* darkened slightly from FBBF24 for text visibility */
+}
+
+/* Dark Mode Overrides */
+/* Dark Mode Overrides */
+.dark {
+  --background: #09090b; /* zinc-950 */
+  --foreground: #fafafa; /* zinc-50 */
+  --sidebar-bg: #18181b; /* zinc-900 */
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa; /* zinc-400 */
+  --text-tertiary: #71717a; /* zinc-500 */
+  
+  /* Category colors - Dark Mode (Softer, lighter backgrounds) */
+  --purple-light: #2A2735; /* desaturated purple-gray */
+  --peach-light: #352925; /* desaturated brown-gray */
+  --cyan-light: #223035; /* desaturated cyan-gray */
+  --blue-light: #242A38; /* desaturated blue-gray */
+  --pink-light: #35252D; /* desaturated pink-gray */
+  --green-light: #22332B; /* desaturated green-gray */
+  
+  /* Accent colors - Dark Mode (Pastel, less neon) */
+  --work-accent: #D8B4FE; /* purple-300 */
+  --travel-accent: #FDBA74; /* orange-300 */
+  --projects-accent: #6EE7B7; /* emerald-300 */
+  --personal-accent: #93C5FD; /* blue-300 */
+  --education-accent: #A5B4FC; /* indigo-300 */
+  --finance-accent: #FCA5A5; /* red-300 */
+  --ideas-accent: #FCD34D; /* amber-300 */
 }
 
 @theme inline {

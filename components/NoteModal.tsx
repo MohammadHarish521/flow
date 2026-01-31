@@ -2,6 +2,7 @@ import { categories, categoryColors, type Category, type Note } from '@/lib/note
 import { createClient } from '@/lib/supabase/client';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import TipTapEditor from './TipTapEditor';
 
 interface NoteModalProps {
   isOpen: boolean;
@@ -125,36 +126,36 @@ export default function NoteModal({ isOpen, onClose, onNoteSaved, note, onDelete
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div 
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-lg transform transition-all animate-in fade-in zoom-in-95 duration-200"
+        className="bg-white dark:bg-(--sidebar-bg) rounded-2xl shadow-2xl w-full max-w-4xl transform transition-all animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="heading-serif text-3xl text-gray-900">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800 shrink-0">
+          <h2 className="heading-serif text-3xl text-gray-900 dark:text-white">
             {note ? 'Edit Note' : 'Create New Note'}
           </h2>
-          <button onClick={onClose} type="button" className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-            <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button onClick={onClose} type="button" className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 flex items-center justify-center transition-colors">
+            <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+        <form onSubmit={handleSubmit} className="p-6 space-y-5 overflow-y-auto flex-1">
           <div>
-            <label htmlFor="note-title" className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+            <label htmlFor="note-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title</label>
             <input
               id="note-title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter note title..."
-              className={`w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all text-gray-900 placeholder-gray-400 ${getRingColor(category)}`}
+              className={`w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all text-gray-900 dark:text-white placeholder-gray-400 bg-white dark:bg-gray-900 ${getRingColor(category)}`}
               autoFocus
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
             <div className="grid grid-cols-4 gap-2">
               {categories.map((cat) => (
                 <button
@@ -164,7 +165,7 @@ export default function NoteModal({ isOpen, onClose, onNoteSaved, note, onDelete
                   className={`px-3 py-2 text-sm rounded-lg border transition-all ${
                     category === cat
                       ? `${getCategoryColor(cat)} text-white border-transparent shadow-md`
-                      : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                      : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   {cat}
@@ -174,14 +175,11 @@ export default function NoteModal({ isOpen, onClose, onNoteSaved, note, onDelete
           </div>
 
           <div>
-            <label htmlFor="note-description" className="block text-sm font-medium text-gray-700 mb-2">Description</label>
-            <textarea
-              id="note-description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description</label>
+            <TipTapEditor 
+              content={description} 
+              onChange={setDescription}
               placeholder="Write your note content here..."
-              rows={5}
-              className={`w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all text-gray-900 placeholder-gray-400 resize-none font-sans ${getRingColor(category)}`}
             />
           </div>
 
@@ -199,7 +197,7 @@ export default function NoteModal({ isOpen, onClose, onNoteSaved, note, onDelete
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors"
+              className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-xl transition-colors"
             >
               Cancel
             </button>

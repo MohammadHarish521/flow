@@ -123,7 +123,7 @@ export default function Sidebar({
       {/* Sidebar */}
       <aside className={`
         fixed inset-y-0 left-0 z-50 
-        w-64 bg-(--color-sidebar-bg) flex flex-col h-screen font-sans border-r border-gray-100
+        w-64 bg-(--color-sidebar-bg) flex flex-col h-screen font-sans border-r border-gray-100 dark:border-gray-800
         transition-transform duration-300 ease-in-out
         md:static md:translate-x-0
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -139,16 +139,16 @@ export default function Sidebar({
                 <path d="M5 15h2" strokeLinecap="round" />
               </svg>
               <h1 className="heading-serif text-3xl text-(--color-text-primary)">
-                Sirius
+                Flow
               </h1>
             </div>
             
             {/* Close Button (Mobile Only) */}
             <button 
               onClick={onClose}
-              className="md:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"
+              className="md:hidden p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -160,7 +160,7 @@ export default function Sidebar({
         <div className="px-6 mb-8">
           <button 
             onClick={handleNewNote}
-            className="w-full bg-[#1C1C1C] text-white rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:bg-black transition-all shadow-sm"
+            className="w-full bg-[#1C1C1C] dark:bg-white text-white dark:text-black rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:bg-black dark:hover:bg-gray-200 transition-all shadow-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -176,8 +176,8 @@ export default function Sidebar({
             onClick={() => handleCategoryClick('All')}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
               selectedCategory === 'All'
-                ? 'bg-gray-100 text-(--color-text-primary)'
-                : 'text-(--color-text-secondary) hover:bg-gray-50'
+                ? 'bg-gray-100 dark:bg-gray-800 text-(--color-text-primary)'
+                : 'text-(--color-text-secondary) hover:bg-gray-50 dark:hover:bg-gray-900'
             }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -191,8 +191,8 @@ export default function Sidebar({
             onClick={() => handleCategoryClick('Starred')}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
               selectedCategory === 'Starred'
-                ? 'bg-gray-100 text-(--color-text-primary)'
-                : 'text-(--color-text-secondary) hover:bg-gray-50'
+                ? 'bg-gray-100 dark:bg-gray-800 text-(--color-text-primary)'
+                : 'text-(--color-text-secondary) hover:bg-gray-50 dark:hover:bg-gray-900'
             }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@ export default function Sidebar({
             <span className="text-[15px] font-medium">Starred</span>
           </button>
 
-          <div className="my-4 border-t border-gray-100 mx-4"></div>
+          <div className="my-4 border-t border-gray-100 dark:border-gray-800 mx-4"></div>
 
           {/* Categories */}
           {categories.map((category) => (
@@ -210,12 +210,12 @@ export default function Sidebar({
               onClick={() => handleCategoryClick(category.name)}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors group ${
                 selectedCategory === category.name
-                  ? 'bg-gray-100 text-(--color-text-primary)'
-                  : 'text-(--color-text-secondary) hover:bg-gray-50'
+                  ? 'bg-gray-100 dark:bg-gray-800 text-(--color-text-primary)'
+                  : 'text-(--color-text-secondary) hover:bg-gray-50 dark:hover:bg-gray-900'
               }`}
             >
               <div className="flex items-center gap-3">
-                <span className={selectedCategory === category.name ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-700'}>
+                <span className={selectedCategory === category.name ? 'text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300'}>
                   {category.icon}
                 </span>
                 <span className="text-[15px] font-medium">{category.name}</span>
