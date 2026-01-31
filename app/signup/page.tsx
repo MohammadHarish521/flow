@@ -99,7 +99,7 @@ export default function SignupPage() {
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-200 via-blue-200 to-purple-200 relative overflow-hidden">
         <div className="flex flex-col justify-center px-16 xl:px-24 w-full" style={{ fontFamily: 'Atkinson Hyperlegible, sans-serif' }}>
           <h1 className="text-6xl font-bold text-gray-900">
-            Slate
+            Flow
           </h1>
           
           <p className="text-2xl text-gray-800 leading-relaxed max-w-md mt-6">
@@ -114,7 +114,7 @@ export default function SignupPage() {
           {/* Mobile Logo */}
           <div className="lg:hidden mb-12 text-center">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              Slate
+              Flow
             </h1>
             <p className="text-gray-600">Where ideas come alive</p>
           </div>
