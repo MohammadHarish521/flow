@@ -174,7 +174,7 @@ export default function Sidebar({
           {/* All Notes */}
           <button
             onClick={() => handleCategoryClick('All')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${
               selectedCategory === 'All'
                 ? 'bg-gray-100 dark:bg-gray-800 text-(--color-text-primary)'
                 : 'text-(--color-text-secondary) hover:bg-gray-50 dark:hover:bg-gray-900'
@@ -189,7 +189,7 @@ export default function Sidebar({
           {/* Starred */}
           <button
             onClick={() => handleCategoryClick('Starred')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${
               selectedCategory === 'Starred'
                 ? 'bg-gray-100 dark:bg-gray-800 text-(--color-text-primary)'
                 : 'text-(--color-text-secondary) hover:bg-gray-50 dark:hover:bg-gray-900'
@@ -208,7 +208,7 @@ export default function Sidebar({
             <button
               key={category.name}
               onClick={() => handleCategoryClick(category.name)}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors group ${
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] group ${
                 selectedCategory === category.name
                   ? 'bg-gray-100 dark:bg-gray-800 text-(--color-text-primary)'
                   : 'text-(--color-text-secondary) hover:bg-gray-50 dark:hover:bg-gray-900'

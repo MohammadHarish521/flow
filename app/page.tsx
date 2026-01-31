@@ -8,9 +8,11 @@ import { useAuth } from '@/lib/auth-context';
 import { mockNotes } from '@/lib/mock-data';
 import { mapNoteRowToNote, type Note, type NoteRow } from '@/lib/notes';
 import { createClient } from '@/lib/supabase/client';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export default function Home() {
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [notes, setNotes] = useState<Note[]>([]);
   const [loadingNotes, setLoadingNotes] = useState(true);
@@ -100,8 +102,7 @@ export default function Home() {
             <NotesGrid 
               notes={filteredNotes} 
               onNoteClick={(note) => {
-                setSelectedNote(note);
-                setIsNewNoteModalOpen(true);
+                router.push(`/note/${note.id}`);
               }}
             />
           )}
